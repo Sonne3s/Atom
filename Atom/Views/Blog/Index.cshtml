@@ -1,0 +1,43 @@
+﻿@model BlogsListModel
+
+@{
+    ViewBag.Title = "Index";
+}
+
+@switch(Model.TypeInfo)
+{
+    case 0: <h2>Главная</h2>; break;
+    case 1: <h2>Новости</h2>; break;
+    case 2: <h2>Анонс</h2>; break;
+    case 3: <h2>Информация</h2>; break;
+    default: <h2>error</h2> ; break;
+}
+
+@if (Model.TypeInfo != 0) { @Html.ActionLink("Добавить", "Create", new { typeInfo = Model.TypeInfo }) }
+@foreach (var m in Model.Articles)
+{
+    <a href="@Url.Action("ViewPage",new { id = m.ID })">
+        <div class="media">
+            <div class="pull-left">
+                @Html.TapeDeterm(@m.Image)
+            </div>
+            <div class="media-body">
+                <div class="media-heading">@m.Name</div>
+                <p>@m.Content.Split('.')[0]</p>
+                @if (m.Publish) {<p>Опубликовано</p>}
+                else {<p>Не опубликовано</p>}
+            </div>
+            @using (Html.BeginForm("Delete", "Blog", new { id = m.ID }))
+            {
+                <input type="submit" class="btn btn-danger" value="Удалить"/>
+            }
+            @using (Html.BeginForm("Publish","Blog", new { id = m.ID }))
+            {
+                <input type="submit" class="btn btn-warning" value='@((m.Publish)?"Изьять":"Опубликовать")'/>
+            }
+        </div>
+    </a>
+}
+
+
+

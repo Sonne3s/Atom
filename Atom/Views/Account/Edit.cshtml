@@ -1,0 +1,22 @@
+﻿@model Atom.Models.EditModel
+@{
+    ViewBag.Title = "Edit";
+}
+
+<h2>Редактирование данных профиля</h2>
+
+@using (Html.BeginForm())
+{
+    <div>
+        @Html.ValidationSummary(true,"")
+        <div>
+            <p>.</p>
+        </div>
+        <div>
+            <div>
+                <input type="submit" value="Сохранить"/>
+            </div>
+        </div>
+    </div>
+}
+

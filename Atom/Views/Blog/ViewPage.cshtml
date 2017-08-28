@@ -1,0 +1,19 @@
+﻿@model Atom.Model.Models.Article
+
+@{
+    ViewBag.Title = "ViewPage";
+}
+
+<h2>ViewPage</h2>
+
+<div>
+            @Html.DisplayFor(model => model.Name)
+        
+            @Html.TapeDeterm(Model.Image)
+
+            @Html.InterpredArticle(Model.Content)        
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
