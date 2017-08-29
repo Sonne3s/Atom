@@ -44,3 +44,25 @@ textarea {
 .override-padding{
     padding: 0 !important;
 }
+.head-label {
+    display: inline-block;
+    height: 100px;
+    width: 100px;
+    background-color: darkblue;
+    color: white;
+    padding: 40px;
+    margin: 5px;
+    /*наклон*/
+    -webkit-transform: skewX(-15deg);
+    -moz-transform: skewX(-15deg);
+    -ms-transform: skewX(-15deg);
+    -o-transform: skewX(-15deg);
+    transform: skewX(-15deg);
+    /*тень*/
+    box-shadow: inset -5px -5px 5px 1px rgb(16, 17, 40);
+    /*скругление*/
+    border-radius: 10px 0 10px 0;
+}
+.head-labels{
+    /*display:inline-block;*/
+}
