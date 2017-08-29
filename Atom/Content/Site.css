@@ -44,13 +44,14 @@ textarea {
 .override-padding{
     padding: 0 !important;
 }
-.head-label {
+.head-char {
     display: inline-block;
     height: 100px;
     width: 100px;
     background-color: darkblue;
     color: white;
-    padding: 40px;
+    font-size:84px;
+    padding: 0px 20px;
     margin: 5px;
     /*наклон*/
     -webkit-transform: skewX(-15deg);
@@ -62,6 +63,11 @@ textarea {
     box-shadow: inset -5px -5px 5px 1px rgb(16, 17, 40);
     /*скругление*/
     border-radius: 10px 0 10px 0;
+}
+.head-label {
+    display: inline-block;
+    color: darkblue;
+    font-size: 84px;
 }
 .head-labels{
     /*display:inline-block;*/
