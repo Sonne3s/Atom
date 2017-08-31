@@ -22,21 +22,29 @@
                 @Html.TapeDeterm(@m.Image)
             </div>
             <div class="media-body">
-                <div class="media-heading">@m.Name</div>
-                <p>@m.Content.Split('.')[0]</p>
-                @if (m.Publish) {<p>Опубликовано</p>}
-                else {<p>Не опубликовано</p>}
+                <div class="col-sm-8">
+                    <div class="media-heading">@m.Name</div>
+                    <p>@m.Content.Split('.')[0]</p>
+                </div>
+                <div class="pull-right col-sm-4">
+                    @using (Html.BeginForm("Delete", "Blog", new { id = m.ID }))
+                {
+                        <button type="submit" class="btn delete">
+                            Удалить <span class="glyphicon glyphicon-remove"></span>
+                        </button>
+                    }
+                    @using (Html.BeginForm("Publish", "Blog", new { id = m.ID }))
+                {
+                        <button type="submit" class="btn publish">
+                            @((m.Publish) ? "Изьять" : "Опубликовать") 
+                            <span class="@((m.Publish)?"glyphicon glyphicon-eye-close":"glyphicon glyphicon-eye-open")"></span>
+                        </button>
+                    }
+                </div>
             </div>
-            @using (Html.BeginForm("Delete", "Blog", new { id = m.ID }))
-            {
-                <input type="submit" class="btn btn-danger" value="Удалить"/>
-            }
-            @using (Html.BeginForm("Publish","Blog", new { id = m.ID }))
-            {
-                <input type="submit" class="btn btn-warning" value='@((m.Publish)?"Изьять":"Опубликовать")'/>
-            }
         </div>
     </a>
+    <hr />
 }
 
 

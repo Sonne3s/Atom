@@ -1,12 +1,17 @@
 ﻿body {
-    padding-top: 50px;
+    padding-top: 120px;
     padding-bottom: 20px;
+    padding-left: 150px;
+    padding-right: 150px;
+    background-image: url(img/site/backgrond.png) !important;
 }
 
 /* Set padding to keep content from hitting the edges */
 .body-content {
     padding-left: 15px;
     padding-right: 15px;
+    background: linear-gradient(to top, rgba(255, 255, 255, 0.58), rgba(255, 255, 255, 0.75));
+    box-shadow: 5px 5px 10px 2px rgba(0, 0, 0, 0.06);
 }
 
 /* Set width on the form input elements since they're 100% wide by default */
@@ -46,13 +51,15 @@ textarea {
 }
 .head-char {
     display: inline-block;
-    height: 100px;
-    width: 100px;
+    height: 40px;
+    width: 40px;
     background-color: darkblue;
     color: white;
-    font-size:84px;
-    padding: 0px 20px;
-    margin: 5px;
+    font-size:42px;
+    /*padding: 0 10px;*/
+    margin: 1px;
+    text-align:center;
+    line-height:1em;
     /*наклон*/
     -webkit-transform: skewX(-15deg);
     -moz-transform: skewX(-15deg);
@@ -67,8 +74,56 @@ textarea {
 .head-label {
     display: inline-block;
     color: darkblue;
-    font-size: 84px;
+    font-size: 44px;
+}
+.head-char > p{
+    vertical-align: top !important;
 }
 .head-labels{
     /*display:inline-block;*/
+}
+.navbar-brand {
+    height: 100px !important;
+    opacity:1 !important;
+}
+.navbar-default {
+    background-color: rgba(18, 18, 18, 0) !important;
+    box-shadow: inset -3px -3px 3px 0px rgba(192, 183, 183, 0.29);
+    background: linear-gradient(to top, rgba(48, 48, 48, 0.15), rgba(63, 63, 63, 0.21));
+}
+.navbar-nav > li > a {
+    color:white !important;
+    font-weight:900;
+}
+.navbar-nav > li > a:hover {
+    color: #9aacff !important;
+}
+.navbar-nav > li:hover {
+    color:#e7e6e6 !important;
+    border-left: 0.5px solid;
+    border-right: 0.5px solid;
+    border-color: rgba(11, 11, 11, 0.05);
+    background: linear-gradient(to top, rgba(18, 18, 18, 0.01), rgba(48, 49, 65, 0.13));
+}
+.publish {
+    background: linear-gradient(to top, rgba(18, 18, 18, 0.01), rgba(48, 49, 65, 0.05)) !important;
+    color: #b5b47c !important;
+    border-radius: 0% !important;
+    box-shadow: inset -2px -2px 8px 1px rgba(192, 183, 183, 0.29);
+    width: 150px;
+    margin:10px 0px;
+}
+.publish:hover span {
+    color: darkblue;
+}
+.delete {
+    background: linear-gradient(to top, rgba(18, 18, 18, 0.01), rgba(48, 49, 65, 0.05)) !important;
+    color: #b5b47c !important;
+    border-radius: 0% !important;
+    box-shadow: inset -2px -2px 8px 1px rgba(192, 183, 183, 0.29);
+    width: 150px;
+    margin: 10px 0px;
+}
+.delete:hover span{
+    color:red;
 }
