@@ -62,7 +62,8 @@ namespace Atom.Controllers
         {
             var upload = Request.Files[0];
             string theme = Request.Form["theme"];
-            int lastIndex= prepository.Pictures.OrderByDescending(x => x.Id).FirstOrDefault().Id;
+            Picture lastPicture = prepository.Pictures.OrderByDescending(x => x.Id).FirstOrDefault();
+            int lastIndex = lastPicture == null ? 0 : lastPicture.Id;
             if (upload != null)
             {
                 // получаем имя файла
@@ -91,6 +92,28 @@ namespace Atom.Controllers
             repository.Publish(id);
             return RedirectToAction("Index");
         }
-
+        public ActionResult Edit(int id)
+        {
+            Article article=repository.Articles.FirstOrDefault(m=>m.ID==id);
+            BlogAddModel model = new BlogAddModel
+            {
+                ID = article.ID,
+                Name = article.Name,
+                Annotation = article.Annotation,
+                Content = article.Content,
+                Image = article.Image,
+                Tags = article.Tags,
+                DateStart = article.DateStart.Value.Date,
+                TimeStart = new DateTime()+article.DateStart.Value.TimeOfDay,
+                DateEnd = article.DateEnd,
+                Type = Convert.ToInt32(article.Type)
+            };
+            return View("~/Views"+Url.Action("Create")+".cshtml",model);
+        }
+        //[HttpPost]
+        //public ActionResult Edit(BlogAddModel article, string typeInfo, int? imgStartIndex = null)
+        //{
+        //    return RedirectToAction("Index");
+        //}
     }
 }

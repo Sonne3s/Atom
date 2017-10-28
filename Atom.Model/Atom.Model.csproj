@@ -110,38 +110,6 @@
     <Compile Include="Concrete\EFArticlesRepository.cs" />
     <Compile Include="Concrete\EFDbContext.cs" />
     <Compile Include="Concrete\EFPicturesRepository.cs" />
-    <Compile Include="Migrations\201707081242085_InitialCreate.cs" />
-    <Compile Include="Migrations\201707081242085_InitialCreate.Designer.cs">
-      <DependentUpon>201707081242085_InitialCreate.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201707161846011_hz.cs" />
-    <Compile Include="Migrations\201707161846011_hz.Designer.cs">
-      <DependentUpon>201707161846011_hz.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201707162024485_addPictures.cs" />
-    <Compile Include="Migrations\201707162024485_addPictures.Designer.cs">
-      <DependentUpon>201707162024485_addPictures.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201708110309555_picturesDisableAutoincrement.cs" />
-    <Compile Include="Migrations\201708110309555_picturesDisableAutoincrement.Designer.cs">
-      <DependentUpon>201708110309555_picturesDisableAutoincrement.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201708110311413_picturesDisableAutoincrement1.cs" />
-    <Compile Include="Migrations\201708110311413_picturesDisableAutoincrement1.Designer.cs">
-      <DependentUpon>201708110311413_picturesDisableAutoincrement1.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201708110324464_picturesDisableAutoincrement2.cs" />
-    <Compile Include="Migrations\201708110324464_picturesDisableAutoincrement2.Designer.cs">
-      <DependentUpon>201708110324464_picturesDisableAutoincrement2.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201708110340576_picturesDisableAutoincrement3.cs" />
-    <Compile Include="Migrations\201708110340576_picturesDisableAutoincrement3.Designer.cs">
-      <DependentUpon>201708110340576_picturesDisableAutoincrement3.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201708161759197_AddThemeToPictures.cs" />
-    <Compile Include="Migrations\201708161759197_AddThemeToPictures.Designer.cs">
-      <DependentUpon>201708161759197_AddThemeToPictures.cs</DependentUpon>
-    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Article.cs" />
     <Compile Include="Models\IdentityModels.cs" />
@@ -149,32 +117,6 @@
     <Compile Include="Models\Picture.cs" />
     <Compile Include="Models\Student.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Migrations\201707081242085_InitialCreate.resx">
-      <DependentUpon>201707081242085_InitialCreate.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201707161846011_hz.resx">
-      <DependentUpon>201707161846011_hz.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201707162024485_addPictures.resx">
-      <DependentUpon>201707162024485_addPictures.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201708110309555_picturesDisableAutoincrement.resx">
-      <DependentUpon>201708110309555_picturesDisableAutoincrement.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201708110311413_picturesDisableAutoincrement1.resx">
-      <DependentUpon>201708110311413_picturesDisableAutoincrement1.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201708110324464_picturesDisableAutoincrement2.resx">
-      <DependentUpon>201708110324464_picturesDisableAutoincrement2.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201708110340576_picturesDisableAutoincrement3.resx">
-      <DependentUpon>201708110340576_picturesDisableAutoincrement3.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201708161759197_AddThemeToPictures.resx">
-      <DependentUpon>201708161759197_AddThemeToPictures.cs</DependentUpon>
-    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

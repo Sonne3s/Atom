@@ -2,45 +2,100 @@
 
 @{
     ViewBag.Title = "Create";
-    AjaxOptions ajaxOpts = new AjaxOptions();
 }
 <div class="form-horizontal" id="iid">
-@using (Html.BeginForm("Create","Blog",FormMethod.Post,new {id="form"}))
-{
-    <div class="row">
-        <div class="col-md-4">
-            @switch (Model.Type)
-            {
-                case 0: <h2>Error</h2>; break;
-                case 1: <h2>Добавить новость</h2>; break;
-                case 2: <h2>Добавить анонс</h2>; break;
-                case 3: <h2>Добавить статью</h2>; break;
-                default: <h2>Error</h2>; break;
-            }
-        </div>
-        @*<div id="add-effect"><span class="glyphicon glyphicon-camera" style="color:blue"></span></div>*@
-
+    @using (Html.BeginForm("Create", "Blog", FormMethod.Post, new { id = "form" }))
+    {
         @Html.AntiForgeryToken()
-
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        <div class="col-md-8">
-            <div class="form-group">
-                @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+        <div class="row">
+            @{
+                string def = "";
+                switch (Model.Type)
+                {
+                    case 0: def = "Error"; break;
+                    case 1: def = "Новость"; break;
+                    case 2: def = "Анонс"; break;
+                    case 3: def = "Статья"; break;
+                    default: def = "Error"; break;
+                }
+            }
+            @Html.HiddenFor(model=>model.ID)
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label class="control-label col-md-2" for="Type">Тип:</label>
+                    <div class="col-md-10">
+                        @Html.DropDownMenuForCase(new List<string> { "Новость", "Анонс", "Статья" }, def, new {@class="form-control", name="Type" })
+                    </div>
                 </div>
             </div>
 
-            <div class="form-group">
-                @Html.LabelFor(model => model.Image, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.Image, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.Image, "", new { @class = "text-danger" })
+            <div class="col-md-8">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Image, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.Image, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Image, "", new { @class = "text-danger" })
+                    </div>
                 </div>
             </div>
-        </div>
-    </div>
+
+            <div class="col-md-12">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-1" })
+                    <div class="col-md-11">
+                        @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-12">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Annotation, htmlAttributes: new { @class = "control-label col-md-1" })
+                    <div class="col-md-11">
+                        @Html.EditorFor(model => model.Annotation, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Annotation, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-12">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Tags, htmlAttributes: new { @class = "control-label col-md-1" })
+                    <div class="col-md-11">
+                        @Html.EditorFor(model => model.Tags, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Tags, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.DateStart, htmlAttributes: new { @class = "control-label col-md-12" })
+                        <div class="col-md-12">
+                            @Html.EditorFor(model => model.DateStart, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.DateStart, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.TimeStart, htmlAttributes: new { @class = "control-label col-md-12" })
+                        <div class="col-md-12">
+                            @Html.EditorFor(model => model.TimeStart, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.TimeStart, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.DateEnd, htmlAttributes: new { @class = "control-label col-md-12" })
+                        <div class="col-md-12">
+                            @Html.EditorFor(model => model.DateEnd, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.DateEnd, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                </div>
         <div class="form-group">
             @Html.LabelFor(model => model.Content, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-12">
@@ -49,7 +104,8 @@
            {
                id = "textarea",
                @class = "form-control",
-               rows = "10",
+               rows = "30",
+               wrap = "off",
                placeholder = @"Текст вида:
 Абзац1
 <img=1.jpg> - одиночное изображение
@@ -61,23 +117,18 @@
                 @Html.ValidationMessageFor(model => model.Content, "", new { @class = "text-danger" })
             </div>
         </div>
-        <input type="hidden" name="imgStartIndex" />
-        <input type="hidden" name="typeInfo" value="@Model.Type" />
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="button" value="Create" class="btn btn-default" name="sub"/>
+                <input type="hidden" name="imgStartIndex" />
+                <input type="hidden" name="typeInfo" value="@Model.Type" />
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        <input type="button" value="Create" class="btn btn-default" name="sub" />
+                    </div>
+                </div>
             </div>
-        </div>
     }
 </div>
-@using (Ajax.BeginForm("CreatePictures", ajaxOpts))
-{
-    <div id="ajax">
-    @Html.Action("CreatePictures")
-    </div>
-}
-<script src="~/Scripts/create.js"></script>
-@Ajax.ActionLink("Аякс", "Create", new AjaxOptions() { Url = Url.Action("CreateJsonPictures"), OnSuccess = "processData" })
+
+@*@Ajax.ActionLink("Аякс", "Create", new AjaxOptions() { Url = Url.Action("CreateJsonPictures"), OnSuccess = "processData" })*@
 
 <div>
     @Html.ActionLink("Back to List", "Index")

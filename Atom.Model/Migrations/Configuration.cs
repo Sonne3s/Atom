@@ -9,7 +9,8 @@ namespace Atom.Model.Migrations
     {
         public Configuration()
         {
-            AutomaticMigrationsEnabled = false;
+            //Database.SetInitializer<Atom.Model.Concrete.Atom> (new NullDatabaseInitializer<Atom.Model.Concrete.Atom>());
+            AutomaticMigrationsEnabled = true;
             ContextKey = "Atom.Model.Concrete.Atom";
         }
 

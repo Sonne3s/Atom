@@ -2,49 +2,80 @@
 
 @{
     ViewBag.Title = "Index";
+    ViewBag.TypeInfo = Model.TypeInfo;
 }
 
-@switch(Model.TypeInfo)
+@*@switch(Model.TypeInfo)
 {
     case 0: <h2>Главная</h2>; break;
     case 1: <h2>Новости</h2>; break;
     case 2: <h2>Анонс</h2>; break;
     case 3: <h2>Информация</h2>; break;
     default: <h2>error</h2> ; break;
-}
+}*@
 
-@if (Model.TypeInfo != 0) { @Html.ActionLink("Добавить", "Create", new { typeInfo = Model.TypeInfo }) }
-@foreach (var m in Model.Articles)
+@if (Model.TypeInfo != 0&&User.Identity.IsAuthenticated) { @Html.ActionLink("Добавить", "Create", new { typeInfo = Model.TypeInfo }) }
+<hr />
+@foreach (var m in Model.Articles.OrderByDescending(m=>m.Published))
 {
-    <a href="@Url.Action("ViewPage",new { id = m.ID })">
-        <div class="media">
-            <div class="pull-left">
-                @Html.TapeDeterm(@m.Image)
-            </div>
-            <div class="media-body">
-                <div class="col-sm-8">
-                    <div class="media-heading">@m.Name</div>
-                    <p>@m.Content.Split('.')[0]</p>
+    string datestart= m.DateStart.ToString();
+    if(m.DateStart!=null){
+        TimeSpan t = m.DateStart.Value.TimeOfDay;
+        if (t == new TimeSpan()) {
+            DateTime datetime = m.DateStart ?? new DateTime();
+            datestart=datetime.ToString("dd.mm.hhhh");
+        }
+    }
+
+    if (m.Publish||User.Identity.IsAuthenticated)
+    {
+        <div class="article">
+        <a href="@Url.Action("ViewPage", new { id = m.ID })">
+            <div class="media">
+                <div class="pull-left">
+                    @Html.TapeDeterm(@m.Image)
                 </div>
-                <div class="pull-right col-sm-4">
-                    @using (Html.BeginForm("Delete", "Blog", new { id = m.ID }))
-                {
-                        <button type="submit" class="btn delete">
-                            Удалить <span class="glyphicon glyphicon-remove"></span>
-                        </button>
-                    }
-                    @using (Html.BeginForm("Publish", "Blog", new { id = m.ID }))
-                {
-                        <button type="submit" class="btn publish">
-                            @((m.Publish) ? "Изьять" : "Опубликовать") 
-                            <span class="@((m.Publish)?"glyphicon glyphicon-eye-close":"glyphicon glyphicon-eye-open")"></span>
-                        </button>
-                    }
-                </div>
+                <div class="media-body row">
+                    <div class='@(User.Identity.IsAuthenticated?"col-sm-4":"col-sm-8")'>
+                        <div class="media-heading"><h3>@m.Name</h3></div>
+                        <p>@m.Annotation</p>
+                    </div>
+                    <div class='@(User.Identity.IsAuthenticated?"col-sm-8":"col-sm-4") row'>
+                        <div class='@(User.Identity.IsAuthenticated?"col-sm-6":"col-sm-12") row'>
+                            <div class="col-xs-12">@((m.DateEnd!=null)?"Начало :":"")@datestart</div>
+                            <div class="col-xs-12">@((m.DateEnd != null) ? ("Окончание :" + @m.DateEnd):"")</div>
+                        </div>
+                        @if (User.Identity.IsAuthenticated)
+        {
+                            <div class="pull-right col-xs-6">
+                                @using (Html.BeginForm("Edit", "Blog", new { id = m.ID }))
+                                {
+                                    <button type="submit" class="btn edit">
+                                        Редактировать <span class="glyphicon glyphicon-edit"></span>
+                                    </button>
+                                }
+                                @using (Html.BeginForm("Delete", "Blog", new { id = m.ID }))
+                                {
+                                <button type="submit" class="btn delete">
+                                    Удалить <span class="glyphicon glyphicon-remove"></span>
+                                </button>
+                                }
+                                @using (Html.BeginForm("Publish", "Blog", new { id = m.ID }))
+                                {
+                                <button type="submit" class="btn publish">
+                                    @((m.Publish) ? "Изьять" : "Опубликовать")
+                                    <span class="@((m.Publish) ? "glyphicon glyphicon-eye-close" : "glyphicon glyphicon-eye-open")"></span>
+                                </button>
+                                }
+                            </div>
+                        }
+                    </div>
+                    </div>
             </div>
-        </div>
-    </a>
-    <hr />
+        </a>
+        <hr />
+    </div>
+    }
 }
 
 

@@ -1,4 +1,7 @@
-﻿<!DOCTYPE html>
+﻿@{
+    AjaxOptions ajaxOpts = new AjaxOptions();  
+}
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
@@ -32,7 +35,7 @@
             <div class="navbar-collapse collapse">
                 <div class="visible-md visible-lg visible-sm text-center">
                     <div class="visible-lg-inline-block visible-md-inline-block visible-sm-inline-block">
-                        <div class="head-label">Спортивный клуб</div>
+                        <div class="head-label">СПОРТИВНЫЙ КЛУБ</div>
                     </div>
                     <div class="head-char">А</div>
                     <div class="head-char">Т</div>
@@ -40,16 +43,119 @@
                     <div class="head-char">М</div>
                 </div>
                 <ul class="navbar-nav nav">
-                    <li>@Html.ActionLink("Новости", "Index", new {typeInfo="1"})</li>
-                    <li>@Html.ActionLink("Анонс", "Index", new { typeInfo = "2" })</li>
-                    <li>@Html.ActionLink("Новости", "Index", new { typeInfo = "3" })</li>
-                </ul>
-            </div>
+                    <li>@Html.ActionLink("Главная", "Index", "Blog",new { typeInfo = "0" }, new { @class = (ViewBag.TypeInfo == 0) ? "selected" : "menu" })</li>
+                    <li>@Html.ActionLink("Новости", "Index", "Blog", new { typeInfo = "1" }, new { @class = (ViewBag.TypeInfo == 1) ? "selected" : "menu" })</li>
+                    <li>@Html.ActionLink("Анонс", "Index", "Blog", new { typeInfo = "2" }, new { @class = (ViewBag.TypeInfo == 2) ? "selected" : "menu" })</li>
+                    <li>@Html.ActionLink("Информация", "Index", "Blog", new { typeInfo = "3" }, new { @class = (ViewBag.TypeInfo == 3) ? "selected" : "menu" })</li>
+                    <li>
+                        <form class="navbar-form navbar-left" role="search">
+                            <div class="form-group input-group changethisone">
+                                <input type="text" class="form-control" placeholder="Поиск">
+                                    <div class="input-group-btn">
+                                        <button type="submit" class="btn btn-default">
+                                            <span class="glyphicon glyphicon-search"></span>
+                                        </button>
+                                        <button class="btn btn-default dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-option-vertical"></span></button>
+                                        <ul class="dropdown-menu">
+                                            <li><a href="#">Действие</a></li>
+                                            <li><a href="#">Другое действие</a></li>
+                                            <li><a href="#">Еще что-нибудь</a></li>
+                                            <li class="divider"></li>
+                                            <li><a href="#">Отделенный пункт</a></li>
+                                        </ul>
+                                        </div>
+                            </div>
+                        </form>
+                    </li>
+                        @if (User.Identity.IsAuthenticated)
+                        {
+                            <li><a href="">@User.Identity.Name.ToString()</a></li>
+                            <li>@Html.ActionLink("Выйти", "Logout", "Account")</li>
+                        }
+                        else
+                        {
+                            <li>
+                                <ul class="nav navbar-nav navbar-right">
+                                    <li>
+                                        <p class="navbar-text"></p>
+                                    </li>
+                                    <li class="dropdown">
+                                        <a href="#" class="dropdown-toggle" data-toggle="dropdown"><b>Авторизоваться</b> <span class="caret"></span></a>
+                                        <ul id="login-dp" class="dropdown-menu">
+                                            <li>
+                                                <div class="row">
+                                                    <div class="col-md-12">
+                                                        Авторизоваться с помощью:
+                                                        <div class="social-buttons">
+                                                            <a href="#" class="btn btn-fb"><i class="fa fa-facebook"></i>VK</a>
+                                                            <a href="#" class="btn btn-tw"><i class="fa fa-twitter"></i> Twitter</a>
+                                                        </div>
+                                                        или
+                                                        @using (Html.BeginForm("Login", "Account", FormMethod.Post, new { id = "login-nav" }))
+                                                        {@*<form class="form" role="form" method="post" action="login" accept-charset="UTF-8" id="login-nav">*@
+                                                            @Html.AntiForgeryToken()
+                                                            <div class="form-group">
+                                                                <label class="sr-only" for="exampleInputEmail2">Email address</label>
+                                                                <input @*type="email"*@ type="text" class="form-control" id="exampleInputEmail2" placeholder="Электронная почта" name="Email">
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label class="sr-only" for="exampleInputPassword2">Password</label>
+                                                                <input type="password" class="form-control" id="exampleInputPassword2" placeholder="Пароль" name="Password" required>
+                                                                <div class="help-block text-right"><a href="">Забыли пароль?</a></div>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <button type="submit" class="btn btn-primary btn-block">Войти</button>
+                                                            </div>
+                                                            <div class="checkbox">
+                                                                <label>
+                                                                    <input type="checkbox"> Не выходить из системы
+                                                                </label>
+                                                            </div>
+                                                            @*</form>*@}
+                                                    </div>
+                                                    <div class="bottom text-center">
+                                                        Впервые на сайте? <a href="#"><b>Зарегистрируйся</b></a>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                                </li>
+                                }
+</ul>
+</div>
         </div>
     </div>
-
-    <div class="container body-content">
-        @RenderBody()
+    <div class="row">
+        <div class="col-md-2"></div>
+        <div class="container body-content col-md-8 col-xs-12">
+            @RenderBody()
+        </div>
+        <div class="col-md-2"></div>
     </div>
+    @if (ViewBag.Title=="Create")
+    {
+        using (Ajax.BeginForm("CreatePictures", ajaxOpts))
+        {
+        <div id="ajax">
+            <div class='row'>                   
+                <div class='col-md-3 override-padding'>
+                    <div class='thumbnail override-padding' style="width:200px;">
+                        <div class='' >
+                            <label class='btn-block' style='padding:90px; text-align:center;'>
+                                <span class='glyphicon glyphicon-plus' style='font-size:xx-large;'></span>
+                                <input type='file' name='images' id='uploadbtn' multiple='multiple' class='btn btn-default btn-block' style='display:none;' />
+                            </label>
+                        </div>
+                        <p>. </p>
+                    </div>
+                </div>
+                @Html.Action("CreatePictures")
+            </div>
+        </div>
+        }
+    }
+    <script src="~/Scripts/add-images.js"></script>
 </body>
 </html>

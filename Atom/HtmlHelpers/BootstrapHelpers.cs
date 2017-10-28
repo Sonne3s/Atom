@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Web;
 
 namespace Atom.HtmlHelpers
@@ -25,9 +26,10 @@ namespace Atom.HtmlHelpers
                 foreach(string img in images)
                 {
                     output += "<div class='item" + ((i++ == 0) ? " active" : "") + "'>";
-                    output += ImgDetermHelpers.ImgDeterm(img);
+                    output += ImgDetermHelpers.ImgDeterm(Regex.Replace(img, @"\[title\].*\[\/title\]", String.Empty),new {height="400",@class= "center-block img-responsive" });
+                    output += "<a href='' class='carousel-fullscreen'><span class='glyphicon glyphicon-fullscreen left bottom'></span></a>";
                     output += "<div class='carousel-caption'>";
-                    output += "<p>тест</p>";
+                    output += "<h3>"+Regex.Replace(Regex.Match(img, @"(\[title\].*\[\/title\])").Value, @"(\[title\])|(\[\/title\])","") +"</h3>";
                     output += "</div></div>";
                 }
                 output += "</div>";

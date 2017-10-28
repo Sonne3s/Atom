@@ -35,6 +35,11 @@ namespace Atom.Model.Concrete
                     dbEntry.Published = DateTime.Now;
                     dbEntry.Type = article.Type;
                     dbEntry.UserID = article.UserID;
+                    dbEntry.Annotation = article.Annotation;
+                    dbEntry.Content = article.Content;
+                    dbEntry.DateEnd = article.DateEnd;
+                    dbEntry.DateStart = article.DateStart;
+                    dbEntry.Tags = article.Tags;
                 }
             }
             db.SaveChanges();

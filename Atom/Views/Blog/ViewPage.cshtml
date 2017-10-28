@@ -1,19 +1,37 @@
 ﻿@model Atom.Model.Models.Article
-
+<script src="~/Scripts/viewpage.js"></script>
 @{
     ViewBag.Title = "ViewPage";
+    string datestart = Model.DateStart.ToString();
+    if (Model.DateStart != null)
+    {
+        TimeSpan t = Model.DateStart.Value.TimeOfDay;
+        if (t == new TimeSpan())
+        {
+            DateTime datetime = Model.DateStart ?? new DateTime();
+            datestart = datetime.ToString("dd.mm.hhhh");
+        }
+    }
 }
-
-<h2>ViewPage</h2>
-
-<div>
-            @Html.DisplayFor(model => model.Name)
-        
-            @Html.TapeDeterm(Model.Image)
-
-            @Html.InterpredArticle(Model.Content)        
+<div id="modal" class="modal fade">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-body">
+                <img class="img-responsive" />
+            </div>
+        </div>
+    </div>
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
+
+<div>    
+    <a href="@Request.UrlReferrer" class="article-back"><span class="glyphicon glyphicon-level-up"></span>назад</a>
+    <h2>@Html.DisplayFor(model => model.Name)</h2>
+    <div class="col-xs-12"><p class="date-article">@((Model.DateEnd != null) ? "Начало :" : "")@datestart</p></div>
+    <div class="col-xs-12"><p class="date-article">@((Model.DateEnd != null) ? ("Окончание :" + Model.DateEnd) : "")</p></div>
+    <br />
+    <p>@Html.DisplayFor(model => model.Annotation)</p>
+    <br />
+    @Html.InterpredTags(Model.Tags)
+    <hr />
+    @Html.InterpredArticle(Model.Content)
+</div>
